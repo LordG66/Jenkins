@@ -1,0 +1,109 @@
+Started by user Gabi Titarenko
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/cowsay
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url http://gitlab/LordG66/cowsay # timeout=10
+Fetching upstream changes from http://gitlab/LordG66/cowsay
+ > git --version # timeout=10
+ > git fetch --tags --progress -- http://gitlab/LordG66/cowsay +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision d13af740bbe6a3ef96750278e103a7974e4fdef0 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d13af740bbe6a3ef96750278e103a7974e4fdef0 # timeout=10
+Commit message: "more fixes"
+ > git rev-list --no-walk d13af740bbe6a3ef96750278e103a7974e4fdef0 # timeout=10
+[cowsay] $ /bin/sh -xe /tmp/jenkins7712165515131919888.sh
++ docker build -t cowsay .
+Sending build context to Docker daemon  268.8kB
+
+Step 1/6 : FROM node:alpine
+ ---> b809734bb743
+Step 2/6 : WORKDIR /app
+ ---> Using cache
+ ---> 82ba74fad761
+Step 3/6 : COPY ./src .
+ ---> Using cache
+ ---> d0f61c9248c7
+Step 4/6 : RUN npm install
+ ---> Using cache
+ ---> 656395e447b0
+Step 5/6 : ENTRYPOINT [ "./entry-point.sh" ]
+ ---> Using cache
+ ---> 7bfa4ac31cec
+Step 6/6 : CMD [ "8080" ]
+ ---> Using cache
+ ---> 57434bf62b5f
+Successfully built 57434bf62b5f
+Successfully tagged cowsay:latest
+[cowsay] $ /bin/sh -xe /tmp/jenkins267291748934470207.sh
++ docker run -p 8000:8000 --name apptest --network cowsay_default -d cowsay 8000
+8139610f4cc3299a36a243449003500a629609eede8fd92c2b1f2702d458f8c6
+[cowsay] $ /bin/sh -xe /tmp/jenkins8080587886625343444.sh
++ wget apptest:8000
+--2020-02-05 07:44:41--  http://apptest:8000/
+Resolving apptest (apptest)... 172.20.0.4
+Connecting to apptest (apptest)|172.20.0.4|:8000... failed: Connection refused.
++ sleep 1
++ wget apptest:8000
+--2020-02-05 07:44:42--  http://apptest:8000/
+Resolving apptest (apptest)... 172.20.0.4
+Connecting to apptest (apptest)|172.20.0.4|:8000... failed: Connection refused.
++ sleep 1
++ wget apptest:8000
+--2020-02-05 07:44:43--  http://apptest:8000/
+Resolving apptest (apptest)... 172.20.0.4
+Connecting to apptest (apptest)|172.20.0.4|:8000... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 931 [text/html]
+Saving to: ‘index.html’
+
+     0K                                                       100% 46.1M=0s
+
+2020-02-05 07:44:43 (46.1 MB/s) - ‘index.html’ saved [931/931]
+
++ curl apptest:8000
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  1083  100  1083    0     0   2729      0 --:--:-- --:--:-- --:--:--  2734
+
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="cowsay">
+      <meta name="author" content="Bibby Chung">
+      <link rel="icon" href="/favicon.ico">
+  
+      <title>Cow Say</title>
+    </head>
+  
+    <body>
+      <pre>
+ ______________________________________________________________
+/                                                              \
+| Deepak Chopra Quote:                                         |
+|                                                              |
+| " The Higgs boson differentiates into objective belonging  " |
+|                                                              |
+\                                                              /
+ --------------------------------------------------------------
+        \   ^__^
+         \  (oO)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+          </pre>
+      <br/><br/>
+    </body>
+  </html>
+
+[cowsay] $ /bin/sh -xe /tmp/jenkins1980579516756577771.sh
++ docker rm -f apptest
+apptest
+Finished: SUCCESS

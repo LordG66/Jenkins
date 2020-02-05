@@ -1,0 +1,10 @@
+Create a Jenkins image docker client abilities
+Create a docker-compose ci topology:
+Gitlab CE  exposed for use on your machine 
+Docker-able Jenkins
+Push cowsay sources to your gitlab
+Create job that builds cowsay
+Create Build Step
+Add Test Step
+Starts cowsay on jenkins machine
+Curl 
