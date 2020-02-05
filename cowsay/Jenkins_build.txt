@@ -1,0 +1,8 @@
+# These are the commands that are ran from the jenkins configuration.
+docker build -t cowsay .
+docker run -p 8000:8000 --name apptest --network cowsay_default -d cowsay 8000
+while ! wget apptest:8000; do 
+sleep 1
+done
+curl apptest:8000
+docker rm -f apptest
