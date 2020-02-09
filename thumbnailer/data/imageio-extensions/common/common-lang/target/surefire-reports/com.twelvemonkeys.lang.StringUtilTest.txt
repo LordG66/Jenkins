@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.twelvemonkeys.lang.StringUtilTest
--------------------------------------------------------------------------------
-Tests run: 56, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.262 s <<< FAILURE! - in com.twelvemonkeys.lang.StringUtilTest
-testToDateWithFormat(com.twelvemonkeys.lang.StringUtilTest)  Time elapsed: 0.017 s  <<< ERROR!
-java.lang.IllegalArgumentException: Unparseable date: "13.5.04 23:51"
-	at com.twelvemonkeys.lang.StringUtilTest.testToDateWithFormat(StringUtilTest.java:586)
-

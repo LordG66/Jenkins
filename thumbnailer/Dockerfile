@@ -3,7 +3,9 @@ WORKDIR /thumbnail
 COPY ./base/imageio-extensions ./imageio-extensions
 WORKDIR /thumbnail/imageio-extensions
 RUN mvn install
-COPY ./base/app /thumbnail/app
-WORKDIR /thumbnail/app
+COPY ./base/thumbnailer /thumbnail/thumbnailer
+COPY ./entrypoint.sh /thumbnail/thumbnailer
+WORKDIR /thumbnail/thumbnailer
 RUN mvn verify
-ENTRYPOINT [ "./thumbnail.sh", "examples/jenkins1.jpg" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
+CMD 
